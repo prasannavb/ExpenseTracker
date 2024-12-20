@@ -1,0 +1,91 @@
+.Navbar {
+    background-color: #18181B;
+    color: white;
+    width: 100%;
+    height: 11vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.Navbar-Logo-div {
+    width: 25%;
+    height: 100%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Navbar-Logo {
+    width: 20%;
+    height: 75%;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.Navbar-Logo-title {
+    width: 50%;
+    margin-left: 2%;
+    align-self: center;
+    cursor: pointer;
+}
+
+.Navbar-items {
+    width: 75%;
+    height: 100%;
+    padding: 2%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Navbar-items button {
+    cursor: pointer;
+    border: 2px solid #48cf7a;
+    background-color: #48cf7a;
+    border-radius: 5px;
+    color: white;
+    transition: 0.5s background-color;
+    width: 10%;
+    padding: 1%;
+    margin: 0 3%;
+}
+
+.Navbar-items button:hover {
+    background-color: #3dad66;
+    border: 2px solid #3dad66;
+}
+
+@media (max-width: 768px) {
+    .Navbar-Logo-div {
+        width: 100%;
+    }
+
+    .Navbar-Logo-title {
+        font-size: 1.5em;
+    }
+
+    .Navbar-items {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Navbar-items button {
+        width: fit-content;
+        margin: 0 5%;
+        padding: 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .Navbar-Logo {
+        width: 25%; 
+    }
+
+    .Navbar-Logo-title {
+        font-size: 1.2em;
+    }
+}

@@ -1,0 +1,115 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6; 
+    /* border: 2px solid red; */
+    padding:2%;
+  }
+  
+  /* Card styles */
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+
+  }
+  
+  /* Card header */
+  .login-card-header {
+    padding:5%;
+    text-align: center;
+
+  }
+  
+  .login-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .login-card-description {
+    font-size: 0.875rem;
+    color: #6b7280; 
+    margin-top:2%;
+    /* border: 2px solid red; */
+
+  }
+  
+  /* Card content */
+  .login-card-content {
+    padding: 5%;
+    /* border: 2px solid red; */
+
+  }
+  
+  .login-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .login-form-control {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+
+  }
+  
+  .login-form-control label {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: 2%;
+    color: #374151; 
+    /* border: 2px solid red; */
+
+  }
+  
+  .login-form-control input {
+    padding: 3%;
+    font-size: 0.875rem;
+    border: 1px solid #d1d5db; /* Light gray border */
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .input:focus {
+    border-color: #2563eb; /* Blue border on focus */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Blue focus ring */
+  }
+  
+  /* Card footer */
+  .login-card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding:3%;
+  }
+  
+  .login-btn:hover
+  {
+    background-color: #374151;
+  }
+  
+  
+  .signup-link {
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  
+  .link {
+    color: #2563eb; /* Blue text */
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
