@@ -4,25 +4,20 @@
     align-items: center;
     justify-content: center;
     background-color: #f3f4f6; 
-    /* border: 2px solid red; */
     padding:2%;
   }
   
-  /* Card styles */
   .login-card {
     width: 100%;
     max-width: 400px;
-    background-color: #ffffff; /* White background */
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    /* border: 2px solid red; */
-
   }
   
-  /* Card header */
   .login-card-header {
     padding:5%;
     text-align: center;
@@ -39,15 +34,10 @@
     font-size: 0.875rem;
     color: #6b7280; 
     margin-top:2%;
-    /* border: 2px solid red; */
-
   }
   
-  /* Card content */
   .login-card-content {
     padding: 5%;
-    /* border: 2px solid red; */
-
   }
   
   .login-form-group {
@@ -59,8 +49,6 @@
   .login-form-control {
     display: flex;
     flex-direction: column;
-    /* border: 2px solid red; */
-
   }
   
   .login-form-control label {
@@ -68,24 +56,21 @@
     font-weight: bold;
     margin-bottom: 2%;
     color: #374151; 
-    /* border: 2px solid red; */
-
   }
   
   .login-form-control input {
     padding: 3%;
     font-size: 0.875rem;
-    border: 1px solid #d1d5db; /* Light gray border */
+    border: 1px solid #d1d5db;
     border-radius: 4px;
     outline: none;
   }
   
   .input:focus {
-    border-color: #2563eb; /* Blue border on focus */
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Blue focus ring */
+    border-color: #2563eb; 
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); 
   }
   
-  /* Card footer */
   .login-card-footer {
     display: flex;
     flex-direction: column;
@@ -106,7 +91,7 @@
   }
   
   .link {
-    color: #2563eb; /* Blue text */
+    color: #2563eb; 
     text-decoration: none;
   }
   

@@ -7,26 +7,23 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-  const LoginInDetails=async()=>
-  {
+  const loginUser = async () => {
     try {
-        const response = await axios.post('http://localhost:8080/login', { email, password });
-        console.log('Login successful:', response.data);
-        sessionStorage.setItem('uid',response.data.uid)
-        navigate('/')
-      } catch (error) {
-        alert(error.response.data.message)
-      } finally {
-      }
-  }
+      const response = await axios.post('http://localhost:8080/login', { email, password });
+      sessionStorage.setItem('uid', response.data.uid);
+      navigate('/');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    let valid = true;
     const newErrors = { email: '', password: '' };
+    let valid = true;
 
     if (!email) {
       newErrors.email = 'Please enter your email';
@@ -40,9 +37,7 @@ export default function Login() {
 
     setErrors(newErrors);
 
-    if (valid) {
-        LoginInDetails();
-    }
+    if (valid) loginUser();
   };
 
   return (
