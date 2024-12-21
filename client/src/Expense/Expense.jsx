@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 
-const initialExpenses = [
-  { id: 1, name: 'Groceries', amount: 50.00, date: '2023-06-15', type: 'Food' },
-  { id: 2, name: 'Gas', amount: 30.00, date: '2023-06-16', type: 'Transportation' },
-  { id: 3, name: 'Movie Tickets', amount: 25.00, date: '2023-06-17', type: 'Entertainment' },
-];
 
 const ExpensesPage = () => {
   const [expenses, setExpenses] = useState([]);
@@ -39,15 +34,14 @@ const ExpensesPage = () => {
   const validateForm = () => {
     const errors = {};
     if (!formData.name.trim()) errors.name = 'Expense name is required';
-    if (!formData.amount || isNaN(formData.amount) || formData.amount <= 0 || formData.amount>budget_limit.budget_limit ) {
+    if (!formData.amount || isNaN(formData.amount) || formData.amount <= 0 ||( (formData.type.trim()==="Expenditure") && Number(formData.amount)>Number(budget_limit.budget_limit))) {
       errors.amount = 'Please enter a valid amount';
     }
-    if (formData.amount+budget_limit.total_expenses>budget_limit.budget_limit ) {
-      errors.amount = 'Expense will exceed allocated budget';
+      if (formData.type.trim()==="Expenditure" && Number(formData.amount)+Number(budget_limit.total_expenses)>Number(budget_limit.budget_limit )) {
+        errors.amount = 'Expense will exceed allocated budget';
     }
     if (!formData.type.trim()) errors.type = 'Expense type is required';
     setFormErrors(errors);
-    console.log(formData.amount>budget_limit.budget_limit)
     return Object.keys(errors).length === 0;
   };
 
@@ -75,11 +69,11 @@ const ExpensesPage = () => {
       const {data}=await axios.post('http://localhost:8080/createexpense',formData)
     alert(data.message)
     fetchBudgetExpense(sessionStorage.getItem('bid'))
-    closeModal()
     } catch (error) {
       alert(error.response.data.message)    
       
     }
+    closeModal()
   }
 
   const updateExpense = async () => {
@@ -92,28 +86,51 @@ const ExpensesPage = () => {
       });  
       alert(data.message);
       fetchBudgetExpense(sessionStorage.getItem('bid')); // Refresh budget expenses
-      closeModal(); // Close the modal on success
     } catch (error) {
       console.error('Error updating expense:', error);
       const errorMessage = error.response?.data?.message || 'Failed to update expense. Please try again.';
       alert(errorMessage);
     }
+    closeModal(); // Close the modal on success
   };
   
 
-  const fetchBudgetExpense=async(bid)=>
-  {
-      const {data}=await axios.get(`http://localhost:8080/fetchallbudgetexpense/${bid}`)
-      console.log(data)
-      setExpenses(data)
-  }
+  const fetchBudgetExpense = async (bid) => {
+    try {
+      const { data } = await axios.get(`http://localhost:8080/fetchallbudgetexpense/${bid}`);
+      const expensesList = data || [];
+      
+      // Filter expenses to include only those of type 'expenditure'
+      const expenditureExpenses = expensesList.filter(expense => expense.type === 'Expenditure');
+  
+      // Calculate the total of filtered expenses
+      const totalExpenses = expenditureExpenses.length > 0 
+        ? expenditureExpenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0) 
+        : 0;
+  
+      sessionStorage.setItem('total_expenses', totalExpenses);
+  
+      setExpenses(expensesList); // Set all expenses for display
+      setBudgetLimit({
+        budget_limit: sessionStorage.getItem('budget_limit'),
+        total_expenses: totalExpenses,
+      });
+  
+      console.log('Fetched expenses:', expensesList);
+      console.log('Filtered expenditures:', expenditureExpenses);
+      console.log('Total expenses (only expenditures):', totalExpenses);
+    } catch (error) {
+      console.error('Error fetching budget expenses:', error);
+      alert('Failed to fetch budget expenses. Please try again later.');
+    }
+  };
+  
 
   useEffect(()=>{
     if(!sessionStorage.getItem('uid') || !sessionStorage.getItem('bid'))
     {
         navigate('/')
     }
-    setBudgetLimit(sessionStorage.getItem('budget_limit'))
     fetchBudgetExpense(sessionStorage.getItem('bid'))
   },[])
 
@@ -139,8 +156,7 @@ const ExpensesPage = () => {
         <h1 className="text-3xl font-bold">Expenses</h1>
         <button
           onClick={() => openModal()}
-          className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-green-700 transition-colors"
-          
+          className=" text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors addbtn"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />

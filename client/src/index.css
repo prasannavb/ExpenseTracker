@@ -18,3 +18,13 @@ body,html
   font-family: 'Poppins', sans-serif;
 }
 
+.addbtn
+{
+  background-color: #18181B;
+
+}
+
+.addbtn:hover
+{
+  background-color: #374151;
+}

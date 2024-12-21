@@ -119,7 +119,10 @@ app.get('/fetchallbudget/:uid', async (req, res) => {
             include: [
                 {
                     model: Expense,
-                    attributes: [], 
+                    attributes: [],
+                    where: { type: 'Expenditure' },
+                    required: false, // Ensure LEFT JOIN to include budgets without matching expenses
+ 
                 },
             ],
             group: ['Budget.bid'], 
@@ -211,7 +214,8 @@ app.get("/fetchallexpense/:uid",async (req, res) => {
 app.get("/fetchallbudgetexpense/:bid",async (req, res) => {
     try {
         const { bid } = req.params;
-        const expenses = await Expense.findAll({attributes:['expid','name','type','amount','budget','date'], where: { bid } });
+        const expenses = await Expense.findAll({attributes:['expid','name','type','amount','budget','date',
+            ], where: { bid } });
         res.status(200).send(expenses);
     } catch (error) {
         handleServerError(res, error);

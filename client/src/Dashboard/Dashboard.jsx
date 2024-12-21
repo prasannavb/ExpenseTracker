@@ -142,12 +142,10 @@ const Dashboard = () => {
     }
   };
 
-  const viewAllExpense=(bid,budget_limit,total_expenses)=>
+  const viewAllExpense=(bid,budget_limit)=>
   {
-    console.log(bid)
     sessionStorage.setItem('bid',bid)
     sessionStorage.setItem('budget_limit',budget_limit)
-    sessionStorage.setItem('total_expenses',total_expenses)
     navigate(`/budget/${bid}`)
   }
 
@@ -159,7 +157,7 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold">Existing Budgets</h1>
         <button
           onClick={() => openModal('add')}
-          className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-green-700 transition-colors"
+          className=" text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors addbtn"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
@@ -210,7 +208,7 @@ const Dashboard = () => {
 
               <div className="mt-4 flex justify-end space-x-2">
                 <button
-                onClick={()=>{viewAllExpense(budget.bid,budget.budget_limit,budget.total_expenses)}}
+                onClick={()=>{viewAllExpense(budget.bid,budget.budget_limit)}}
                   className="text-green-600 hover:text-green-800 focus:outline-none"
                 
                 >
@@ -304,32 +302,29 @@ const Dashboard = () => {
       
        <h2 className="text-2xl font-bold mt-12 mb-6">Recent Expenses</h2>
       <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="w-full">
-          <thead className="divide-y divide-black">
+      <table className="min-w-full leading-normal">
+          <thead>
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Amount
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Date
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Type
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Budget
               </th>
-              
             </tr>
           </thead>
-          <tbody className="divide-y divide-black">
-            {expenses.map((expense,index) => (
+          <tbody>
+            {expenses.map((expense) => (
               <tr key={expense.id}
-              className={index % 2 === 0 ? 'bg-white-200' : 'bg-blue-200'}
-
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {expense.name}

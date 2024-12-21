@@ -41,22 +41,6 @@
     align-items: center;
 }
 
-.Navbar-items button {
-    cursor: pointer;
-    border: 2px solid #48cf7a;
-    background-color: #48cf7a;
-    border-radius: 5px;
-    color: white;
-    transition: 0.5s background-color;
-    width: 10%;
-    padding: 1%;
-    margin: 0 3%;
-}
-
-.Navbar-items button:hover {
-    background-color: #3dad66;
-    border: 2px solid #3dad66;
-}
 
 @media (max-width: 768px) {
     .Navbar-Logo-div {
